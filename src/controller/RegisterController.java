@@ -30,13 +30,17 @@ public class RegisterController {
     @FXML
     private TextField tf_lastname;
 
-    @FXML
-    void clearAction(ActionEvent event) {
+    private void clear(){
         tf_name.clear();
         tf_lastname.clear();
         tf_login.clear();
         pf_password.clear();
         pf_password2.clear();
+    }
+
+    @FXML
+    void clearAction(ActionEvent event) {
+        clear();
     }
     private void insertData() {
         // rejestracja użytkownika na podstawie podanych pól
@@ -56,6 +60,7 @@ public class RegisterController {
             a.setHeaderText("Zarejestrowano użytkownika");
             a.setContentText("Zarejestrowano użytkownika " + tf_login.getText());
             a.show();
+            clear();
         } catch (SQLException e){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("Błąd");
@@ -72,7 +77,13 @@ public class RegisterController {
     }
     @FXML
     void keyRegisterAction(KeyEvent event) {
-
+        // dla entera - rejestracja
+        // dla esc - clear
+//        if(?) {
+//            insertData();
+//        } else if(?){
+//            clear();
+//        }
     }
     @FXML
     void registerAction(ActionEvent event) {
