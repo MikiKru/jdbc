@@ -3,12 +3,17 @@ package controller;
 import configuration.DBConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -45,11 +50,14 @@ public class RegisterController {
     void clearAction(ActionEvent event) {
         clear();
     }
-    private void insertData() {
+    private void insertData() throws IOException {
         // rejestracja użytkownika na podstawie podanych pól
         try {
             // sprawdzam czy hasła są jednokowe
-            if(!pf_password.getText().equals(pf_password2.getText())){
+            if (tf_login.getText().equals("") || pf_password.getText().equals("") || tf_name.getText().equals("") || tf_lastname.getText().equals("")) {
+                throw new NullPointerException();
+            }
+            if (!pf_password.getText().equals(pf_password2.getText())) {
                 throw new InputMismatchException();
             }
             ps = connection.prepareStatement("INSERT INTO users VALUES (default, ?, ?, ?, ?, default, default, default)");
@@ -63,7 +71,24 @@ public class RegisterController {
             a.setHeaderText("Zarejestrowano użytkownika");
             a.setContentText("Zarejestrowano użytkownika " + tf_login.getText());
             a.show();
+            // czyszczenie pól
             clear();
+            // zamknięcie okna i przejście do logowania
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/loginView.fxml"));
+            stage.setTitle("Panel rejestracji");
+            stage.setScene(new Scene(root));
+            stage.show();
+            // zamknięcie okna
+            Stage stageClosed = (Stage) tf_login.getScene().getWindow();
+            stageClosed.close();
+
+        } catch (NullPointerException e){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle("Błąd");
+            a.setHeaderText("Musisz uzupełnić wszystkie pola");
+            a.setContentText("Uzupełnij wszystkie pola!");
+            a.show();
         } catch (SQLException e){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setTitle("Błąd");
@@ -79,7 +104,7 @@ public class RegisterController {
         }
     }
     @FXML
-    void keyRegisterAction(KeyEvent event) {
+    void keyRegisterAction(KeyEvent event) throws IOException {
 //         dla entera - rejestracja
 //         dla esc - clear
 //        if(event.getCode() == KeyCode.ENTER) {
@@ -101,7 +126,7 @@ public class RegisterController {
         }
     }
     @FXML
-    void registerAction(ActionEvent event) {
+    void registerAction(ActionEvent event) throws IOException {
         insertData();
     }
     // globalne obiekty połączenia do bazy danych
