@@ -6,9 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import service.AlertService;
+import service.WindowService;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -48,18 +51,15 @@ public class LoginController {
             System.out.println(resultSet.getString(7));
             System.out.println(resultSet.getDate(8));
         } else {
-            System.out.println("Błąd logowania!");
+            AlertService.showAlert(Alert.AlertType.INFORMATION, "Błąd logowania", "Zarejestruj się!");
         }
     }
 
     @FXML
     void registerAction(ActionEvent event) throws IOException {
         // utworzenie okna nowego widoku
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/registerView.fxml"));
-        stage.setTitle("Panel rejestracji");
-        stage.setScene(new Scene(root));
-        stage.show();
+        WindowService.showWindow("/view/registerView.fxml", "Panel rejestracji");
+        WindowService.closeWindow(tf_login);
     }
     // globalne obiekty połączenia do bazy danych
     DBConnector dbConnector;

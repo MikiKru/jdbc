@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import service.AlertService;
+import service.WindowService;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -66,41 +68,19 @@ public class RegisterController {
             ps.setString(3, tf_login.getText());
             ps.setString(4, pf_password.getText());
             ps.executeUpdate();
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setTitle("Rejestracja");
-            a.setHeaderText("Zarejestrowano użytkownika");
-            a.setContentText("Zarejestrowano użytkownika " + tf_login.getText());
-            a.show();
+            AlertService.showAlert(Alert.AlertType.INFORMATION, "Rejestracja", "Zareejstrowano użytkownika");
             // czyszczenie pól
             clear();
             // zamknięcie okna i przejście do logowania
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/view/loginView.fxml"));
-            stage.setTitle("Panel rejestracji");
-            stage.setScene(new Scene(root));
-            stage.show();
-            // zamknięcie okna
-            Stage stageClosed = (Stage) tf_login.getScene().getWindow();
-            stageClosed.close();
+            WindowService.showWindow("/view/loginView.fxml", "Panel logowania");
+            WindowService.closeWindow(tf_login);
 
         } catch (NullPointerException e){
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("Błąd");
-            a.setHeaderText("Musisz uzupełnić wszystkie pola");
-            a.setContentText("Uzupełnij wszystkie pola!");
-            a.show();
+            AlertService.showAlert(Alert.AlertType.INFORMATION, "Brak wartości", "Uzupełnij brajujące pola");
         } catch (SQLException e){
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("Błąd");
-            a.setHeaderText("Podany login już istnije w bazie danych");
-            a.setContentText("Musisz podać inny login!");
-            a.show();
+            AlertService.showAlert(Alert.AlertType.INFORMATION, "Błędny login", "Login istnieje w bazie danych");
         } catch (InputMismatchException e){
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("Błąd");
-            a.setHeaderText("Podane hasła nie są jednokowe");
-            a.setContentText("Musisz podać jednakowe hasła!");
-            a.show();
+            AlertService.showAlert(Alert.AlertType.INFORMATION, "Różne hasła", "Hasła muszą być jednakowe");
         }
     }
     @FXML
