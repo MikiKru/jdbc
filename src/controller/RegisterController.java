@@ -1,10 +1,15 @@
 package controller;
 
+import configuration.DBConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class RegisterController {
 
@@ -25,7 +30,11 @@ public class RegisterController {
 
     @FXML
     void clearAction(ActionEvent event) {
-
+        tf_name.clear();
+        tf_lastname.clear();
+        tf_login.clear();
+        pf_password.clear();
+        pf_password2.clear();
     }
 
     @FXML
@@ -37,5 +46,13 @@ public class RegisterController {
     void registerAction(ActionEvent event) {
 
     }
-
+    // globalne obiekty połączenia do bazy danych
+    DBConnector dbConnector;
+    Connection connection;
+    // globalny obiekt do wykonywania zapytań
+    PreparedStatement ps;
+    public void initialize() throws SQLException {
+        dbConnector = new DBConnector();
+        connection = dbConnector.initConnection();
+    }
 }
