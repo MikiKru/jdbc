@@ -121,13 +121,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/controller/RegisterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="81" selection-start-line="81" selection-start-column="2" selection-end-line="85" selection-end-column="11" />
+            <state relative-caret-position="477">
+              <caret line="98" column="22" lean-forward="true" selection-start-line="98" selection-start-column="16" selection-end-line="98" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#895#896#0" expanded="true" />
                 <element signature="e#918#919#0" expanded="true" />
-                <element signature="e#2732#2733#0" expanded="true" />
+                <element signature="e#3253#3254#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -240,7 +240,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553082475038" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553085906090" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -348,12 +348,12 @@
       <option name="presentableId" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-      <workItem from="1553070556216" duration="10403000" />
+      <workItem from="1553070556216" duration="11039000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11705000" />
+    <option name="totallyTimeSpent" value="12341000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -371,7 +371,7 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.032258064" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.032258064" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -511,13 +511,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/RegisterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="81" selection-start-line="81" selection-start-column="2" selection-end-line="85" selection-end-column="11" />
+        <state relative-caret-position="477">
+          <caret line="98" column="22" lean-forward="true" selection-start-line="98" selection-start-column="16" selection-end-line="98" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#895#896#0" expanded="true" />
             <element signature="e#918#919#0" expanded="true" />
-            <element signature="e#2732#2733#0" expanded="true" />
+            <element signature="e#3253#3254#0" expanded="true" />
           </folding>
         </state>
       </provider>

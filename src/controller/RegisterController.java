@@ -6,12 +6,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 
 public class RegisterController {
 
@@ -77,13 +80,25 @@ public class RegisterController {
     }
     @FXML
     void keyRegisterAction(KeyEvent event) {
-        // dla entera - rejestracja
-        // dla esc - clear
-//        if(?) {
+//         dla entera - rejestracja
+//         dla esc - clear
+//        if(event.getCode() == KeyCode.ENTER) {
 //            insertData();
-//        } else if(?){
+//        } else if(event.getCode() == KeyCode.ESCAPE){
 //            clear();
 //        }
+        Map<KeyCode, Integer> keyCodeToInteger = new HashMap<>();
+        keyCodeToInteger.put(KeyCode.ENTER, 1);
+        keyCodeToInteger.put(KeyCode.ESCAPE, 2);
+
+        switch (keyCodeToInteger.get(event.getCode())){
+            case 1:
+                insertData();
+                break;
+            case 2:
+                clear();
+                break;
+        }
     }
     @FXML
     void registerAction(ActionEvent event) {
