@@ -9,6 +9,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import model.Courses;
 import service.CourseService;
 
 import java.sql.SQLException;
@@ -43,7 +44,7 @@ public class CourseController {
     private TableColumn<?, ?> c_date;
 
     @FXML
-    private ComboBox<?> cb_save;
+    private ComboBox<Courses> cb_save;
 
     @FXML
     private Button btn_save;
@@ -52,7 +53,7 @@ public class CourseController {
     private Button btn_delete;
 
     @FXML
-    private ComboBox<?> cb_update;
+    private ComboBox<Courses> cb_update;
 
     @FXML
     private Button btn_update;
@@ -98,7 +99,7 @@ public class CourseController {
         System.out.println(LoginController.id_logged);
         // wykonanie zapytania: ile jest dostępnych kursów
         // zwaraca liczbę kursów
-        int allCoursesCount = courseService.getAllCourses();
+        int allCoursesCount = courseService.getCountAllCourses();
         // złącza napis z liczbą kursów
         String allCoursesCountLabel = "liczba dostępnych kursów: " + allCoursesCount;
         // umieszcza napis na kontrolce
@@ -107,5 +108,8 @@ public class CourseController {
         int myCoursesCount = courseService.getMyCourses(LoginController.id_logged);
         String myCoursesCountLabel = "liczba kursów na które jesteś zapisany: " + myCoursesCount;
         lbl_submission_count.setText(myCoursesCountLabel);
+        // wpisanie kursów z DB do kontrolki ComboBox
+        cb_save.setItems(courseService.getAllCourses());
+        cb_update.setItems(courseService.getAllCourses());
     }
 }

@@ -1,11 +1,15 @@
 package service;
 
 import configuration.DBConnector;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.Courses;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class CourseService {
     private Connection connection;
@@ -14,7 +18,7 @@ public class CourseService {
         DBConnector db = new DBConnector();
         connection = db.initConnection();
     }
-    public int getAllCourses() throws SQLException {
+    public int getCountAllCourses() throws SQLException {
         Statement stmt = connection.createStatement();
         ResultSet resultSet = stmt.executeQuery(
                 "select count(*) from courses");
@@ -36,5 +40,23 @@ public class CourseService {
         stmt.close();
         return 0;
     }
-
+    public ObservableList<Courses> getAllCourses() throws SQLException {
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(
+                "select * from courses");
+        // wprowadzanie rekordów z DB do listy obkietków klasy modelu - Courses
+        ObservableList<Courses> courses_list = FXCollections.observableArrayList();
+        while (rs.next()){
+            Courses c = new Courses(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getDate(4).toLocalDate(),
+                    rs.getString(5),
+                    rs.getDouble(6),
+                    rs.getInt(7));
+            courses_list.add(c);
+        }
+        return courses_list;
+    }
 }
