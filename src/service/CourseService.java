@@ -6,10 +6,7 @@ import javafx.collections.ObservableList;
 import model.Courses;
 import model.SubmissionView;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class CourseService {
@@ -79,6 +76,14 @@ public class CourseService {
             submissions_list.add(sv);
         }
         return submissions_list;
+    }
+    public void saveUserOnCourse(int id_u, int id_c) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(
+                "INSERT INTO submission VALUES (default, ?, ?)"
+        );
+        ps.setInt(1,id_u);
+        ps.setInt(2,id_c);
+        ps.executeUpdate();
     }
 
 

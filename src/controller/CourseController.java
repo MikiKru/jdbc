@@ -14,7 +14,9 @@ import javafx.scene.input.MouseEvent;
 import model.Courses;
 import model.SubmissionView;
 import service.CourseService;
+import service.WindowService;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -69,27 +71,33 @@ public class CourseController {
     private Label lbl_submission_count;
 
     @FXML
-    void deleteAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void exitAction(ActionEvent event) {
-
+        System.exit(0);
     }
 
     @FXML
-    void logoutAction(ActionEvent event) {
-
+    void logoutAction(ActionEvent event) throws IOException {
+        WindowService.showWindow("/view/loginView.fxml", "Panel logowania");
+        WindowService.closeWindow(lbl_course_count);
     }
 
     @FXML
-    void saveAction(ActionEvent event) {
-
+    void saveAction(ActionEvent event) throws SQLException {
+        // pobranie wartości zaznaczonej na combobox
+        Courses courses = cb_save.getValue();
+        // wydobywam id_c z wybranej wartości na combobox
+        int id_c = courses.getId_c();
+        // service do zapisu użtytkownika na kurs
+        new CourseService().saveUserOnCourse(LoginController.id_logged, id_c);
+        initialize();
     }
 
     @FXML
     void selectRowAction(MouseEvent event) {
+
+    }
+    @FXML
+    void deleteAction(ActionEvent event) {
 
     }
 
@@ -99,6 +107,9 @@ public class CourseController {
     }
     @FXML
     void initialize() throws SQLException {
+        // przyciski zmian w zapisach są nieaktywne
+        btn_delete.setDisable(true);
+        btn_update.setDisable(true);
         CourseService courseService = new CourseService();
         System.out.println(LoginController.id_logged);
         // wykonanie zapytania: ile jest dostępnych kursów
