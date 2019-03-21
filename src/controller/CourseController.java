@@ -97,9 +97,15 @@ public class CourseController {
         CourseService courseService = new CourseService();
         System.out.println(LoginController.id_logged);
         // wykonanie zapytania: ile jest dostępnych kursów
-
+        // zwaraca liczbę kursów
+        int allCoursesCount = courseService.getAllCourses();
+        // złącza napis z liczbą kursów
+        String allCoursesCountLabel = "liczba dostępnych kursów: " + allCoursesCount;
+        // umieszcza napis na kontrolce
+        lbl_course_count.setText(allCoursesCountLabel);
         // wykonanie zapytania na ile kursów jestem zapisany
-
+        int myCoursesCount = courseService.getMyCourses(LoginController.id_logged);
+        String myCoursesCountLabel = "liczba kursów na które jesteś zapisany: " + myCoursesCount;
+        lbl_submission_count.setText(myCoursesCountLabel);
     }
-
 }
