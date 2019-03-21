@@ -21,6 +21,9 @@ public class DBConnector {
         connection.close();
     }
     public void showConnectionWarnings(Connection connection) throws SQLException {
-        AlertService.showAlert(Alert.AlertType.WARNING, "DATABASE WARNINGS", connection.getWarnings() == null ? "brak danych" :  connection.getWarnings().toString());
+        AlertService.showAlert(
+                Alert.AlertType.WARNING,
+                "DATABASE WARNINGS",
+                connection.getWarnings() == null ? "brak danych" :  connection.getWarnings().toString());
     }
 }
