@@ -98,16 +98,19 @@ public class CourseController {
         btn_delete.setDisable(false);
     }
     @FXML
-    void deleteAction(ActionEvent event) {
+    void deleteAction(ActionEvent event) throws SQLException {
         int id_selected = tab_course.getSelectionModel().getSelectedItem().getId_s();
         // serwis do usuwania zapisu na kurs na podstawie id_s
+        new CourseService().deleteSubmission(id_selected);
+        initialize();
     }
 
     @FXML
-    void updateAction(ActionEvent event) {
+    void updateAction(ActionEvent event) throws SQLException {
         int id_selected = tab_course.getSelectionModel().getSelectedItem().getId_s();
         // serwis do zmiany zapisu użytkownika id_u na wybrany kurs
-        
+        new CourseService().updateSubmission(id_selected, cb_update.getValue().getId_c());
+        initialize();
     }
     @FXML
     void initialize() throws SQLException {

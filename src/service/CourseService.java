@@ -85,7 +85,19 @@ public class CourseService {
         ps.setInt(2,id_c);
         ps.executeUpdate();
     }
-
+    public void deleteSubmission(int id_s) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(
+                "DELETE FROM submission WHERE id_s = ?");
+        ps.setInt(1,id_s);
+        ps.executeUpdate();
+    }
+    public void updateSubmission(int id_s, int id_c) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(
+                "UPDATE submission SET id_c = ? WHERE id_s = ?");
+        ps.setInt(1,id_c);
+        ps.setInt(2,id_s);
+        ps.executeUpdate();
+    }
 
 
 
