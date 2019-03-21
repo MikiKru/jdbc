@@ -21,6 +21,11 @@ public class Courses {
         this.time_interval = time_interval;
     }
 
+    @Override
+    public String toString() {
+        return "nazwa: "+name +", kategoria: "+ category+", data: "+ start_date;
+    }
+
     public int getId_c() {
         return id_c;
     }
