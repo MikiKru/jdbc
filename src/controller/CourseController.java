@@ -111,5 +111,7 @@ public class CourseController {
         // wpisanie kursów z DB do kontrolki ComboBox
         cb_save.setItems(courseService.getAllCourses());
         cb_update.setItems(courseService.getAllCourses());
+        // wypisanie rekordów z widoku do modelu
+
     }
 }
