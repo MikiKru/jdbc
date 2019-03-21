@@ -9,12 +9,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.Courses;
 import model.SubmissionView;
 import service.CourseService;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class CourseController {
 
@@ -25,25 +27,25 @@ public class CourseController {
     private MenuItem m_exit;
 
     @FXML
-    private TableView<?> tab_course;
+    private TableView<SubmissionView> tab_course;
 
     @FXML
-    private TableColumn<?, ?> c_name;
+    private TableColumn<SubmissionView, String> c_name;
 
     @FXML
-    private TableColumn<?, ?> c_lastname;
+    private TableColumn<SubmissionView, String> c_lastname;
 
     @FXML
-    private TableColumn<?, ?> c_email;
+    private TableColumn<SubmissionView, String> c_email;
 
     @FXML
-    private TableColumn<?, ?> c_course;
+    private TableColumn<SubmissionView, String> c_course;
 
     @FXML
-    private TableColumn<?, ?> c_trainer;
+    private TableColumn<SubmissionView, String> c_trainer;
 
     @FXML
-    private TableColumn<?, ?> c_date;
+    private TableColumn<SubmissionView, LocalDate> c_date;
 
     @FXML
     private ComboBox<Courses> cb_save;
@@ -115,6 +117,15 @@ public class CourseController {
         cb_update.setItems(courseService.getAllCourses());
         // wypisanie rekordów z widoku do modelu
         ObservableList<SubmissionView> submissions_list = courseService.getAllSubmissions();
+        // konfiguracja wartości przekazywanych do tabeli
+        c_name.setCellValueFactory(new PropertyValueFactory<>("username"));
+        c_lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        c_email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        c_course.setCellValueFactory(new PropertyValueFactory<>("course_name"));
+        c_trainer.setCellValueFactory(new PropertyValueFactory<>("trainer"));
+        c_date.setCellValueFactory(new PropertyValueFactory<>("start_date"));
+        // wprowadzenie wartości z listy
+        tab_course.setItems(submissions_list);
 
     }
 }
