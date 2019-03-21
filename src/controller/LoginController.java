@@ -27,8 +27,10 @@ public class LoginController {
     @FXML
     private PasswordField pf_password;
 
+    // globalny statyczny id do przekazania między widokami
+    public static int id_logged;
     @FXML
-    void loginAction(ActionEvent event) throws SQLException {
+    void loginAction(ActionEvent event) throws SQLException, IOException {
         // przygotowuję zapytanie
         ps = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
         // przypisauję wartości do ?
@@ -41,15 +43,10 @@ public class LoginController {
         ResultSet resultSet = ps.executeQuery();
         // przesuwam wskaźnik na pierwszą pozycję i sprawdzam czy jest niepusta
         if(resultSet.next()){
-            // jeżeli jest niepusta to wyciągam zawartość
-            System.out.println(resultSet.getInt(1));
-            System.out.println(resultSet.getString(2));
-            System.out.println(resultSet.getString(3));
-            System.out.println(resultSet.getString(4));
-            System.out.println(resultSet.getString(5));
-            System.out.println(resultSet.getBoolean(6));
-            System.out.println(resultSet.getString(7));
-            System.out.println(resultSet.getDate(8));
+            // do statycznego id przypisuję id zalogowanego użytkownika
+            id_logged = resultSet.getInt(1);
+            WindowService.showWindow("/view/courseView.fxml", "Formularz zapisu na kurs");
+            WindowService.closeWindow(tf_login);
         } else {
             AlertService.showAlert(Alert.AlertType.INFORMATION, "Błąd logowania", "Zarejestruj się!");
         }
