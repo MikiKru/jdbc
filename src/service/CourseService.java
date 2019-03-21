@@ -4,6 +4,7 @@ import configuration.DBConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Courses;
+import model.SubmissionView;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -59,4 +60,28 @@ public class CourseService {
         }
         return courses_list;
     }
+    public ObservableList<SubmissionView> getAllSubmissions() throws SQLException {
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(
+                "select * from submission_view");
+        // wprowadzanie rekordów z DB do listy obkietków klasy modelu - Courses
+        ObservableList<SubmissionView> submissions_list = FXCollections.observableArrayList();
+        while (rs.next()) {
+            SubmissionView sv = new SubmissionView(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getDate(7).toLocalDate()
+            );
+            submissions_list.add(sv);
+        }
+        return submissions_list;
+    }
+
+
+
+
 }

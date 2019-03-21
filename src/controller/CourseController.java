@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import model.Courses;
+import model.SubmissionView;
 import service.CourseService;
 
 import java.sql.SQLException;
@@ -112,6 +114,7 @@ public class CourseController {
         cb_save.setItems(courseService.getAllCourses());
         cb_update.setItems(courseService.getAllCourses());
         // wypisanie rekordów z widoku do modelu
+        ObservableList<SubmissionView> submissions_list = courseService.getAllSubmissions();
 
     }
 }
