@@ -60,10 +60,10 @@ public class CourseService {
         }
         return courses_list;
     }
-    public ObservableList<SubmissionView> getAllSubmissions() throws SQLException {
+    public ObservableList<SubmissionView> getAllSubmissions(int id) throws SQLException {
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(
-                "select * from submission_view");
+                "select * from submission_view where email = (select email from users where id_u = " + id + ")");
         // wprowadzanie rekordów z DB do listy obkietków klasy modelu - Courses
         ObservableList<SubmissionView> submissions_list = FXCollections.observableArrayList();
         while (rs.next()) {

@@ -116,7 +116,7 @@ public class CourseController {
         cb_save.setItems(courseService.getAllCourses());
         cb_update.setItems(courseService.getAllCourses());
         // wypisanie rekordów z widoku do modelu
-        ObservableList<SubmissionView> submissions_list = courseService.getAllSubmissions();
+        ObservableList<SubmissionView> submissions_list = courseService.getAllSubmissions(LoginController.id_logged);
         // konfiguracja wartości przekazywanych do tabeli
         c_name.setCellValueFactory(new PropertyValueFactory<>("username"));
         c_lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
